@@ -9,8 +9,8 @@ function App() {
   const tabButtonTitle = ["Components", "JSX", "Props", "State"];
   const [stateOfButton, setStateOfButton] = useState("components");
   const buttonClickHandler = (selectedButton) => {
-    console.log(selectedButton.title);
-    setStateOfButton(selectedButton.title);
+
+    setStateOfButton(selectedButton);
   };
   return (
     <div>
@@ -32,7 +32,18 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            {tabButtonTitle.map((title) => (<TabButton onClick={() => buttonClickHandler({ title })}> {title} </TabButton>))}
+            {tabButtonTitle.map((title) => {
+          
+              return (
+                <TabButton
+                  key={title}
+                  isSelected={stateOfButton === title.toLowerCase()}
+                  onClick={() => buttonClickHandler(title.toLowerCase())}
+                >
+                  {title}
+                </TabButton>
+              );
+            })}
 
           </menu>
           {
